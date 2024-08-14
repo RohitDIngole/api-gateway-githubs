@@ -1,15 +1,12 @@
-# Base WORKDIR => /
-FROM openjdk:24-jdk-slim
+# Use a base image with Java 11
+FROM openjdk:11-jre-slim
+
+# Define the working directory
 WORKDIR /app
 
-# Define build-time argument
-ARG imageName
+# Copy the application JAR file from the build context to the /app directory in the image
+COPY target/api-gateway-0.0.1-SNAPSHOT.jar app.jar
 
-# Set environment variable from ARG
-ENV IMAGE_NAME=${imageName}
+# Run the application
+ENTRYPOINT ["java", "-jar", "/app/app.jar"]
 
-# Copy Jar from build context to /app directory in the image
-COPY target/${IMAGE_NAME}.jar ${IMAGE_NAME}.jar
-
-# Set the entry point
-ENTRYPOINT ["sh", "-c", "java -jar /app/${IMAGE_NAME}.jar"]
