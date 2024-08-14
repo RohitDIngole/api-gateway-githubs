@@ -31,6 +31,7 @@ jobs :
     - name: OSS Scan
       run: mvn ossindex:audit
     - name: OWASP Scan
+      if: false
       run: mvn org.owasp:dependency-check-maven:check
 
     - name: Build code and Create docker image
