@@ -27,4 +27,11 @@ jobs :
       uses: zricethezav/gitleaks-action@v1.3.0
       with:
         args: --path=.
+    - name: OSS Scan
+      run: mvn ossindex:audit
+    - name: OWASP Scan
+      run: mvn org.owasp:dependency-check-maven:check
+
+    - name: Build code and Create docker image
+      run: mvn clean install docker:build
         
