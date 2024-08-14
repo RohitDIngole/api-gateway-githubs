@@ -6,6 +6,11 @@
   <properties>
 		<maven.compiler.target>17</maven.compiler.target>
 		<maven.compiler.source>17</maven.compiler.source>
+	  <properties>
+    <image.registry>your-docker-registry</image.registry>
+    <image.tag>latest</image.tag>
+</properties>
+
 	</properties>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
