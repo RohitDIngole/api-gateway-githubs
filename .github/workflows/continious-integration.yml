@@ -4,3 +4,23 @@ on:
   push:
     branches: 
       - main 
+
+jobs : 
+  pre-commit-scans: 
+    runs-on: ubuntu-latest
+
+
+    steps: 
+    - name: Setup java
+      uses: actions/setup-java@v4
+      with:
+        distribution: "temurin"
+        java-version: "21"
+
+    - name: Checkout code 
+      uses: actions/checkout@v4
+
+    - name: Check setup
+      run: |
+        java --version 
+        
