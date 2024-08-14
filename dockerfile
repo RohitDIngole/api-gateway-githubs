@@ -1,11 +1,15 @@
-# Use a base image with Java 11
-FROM openjdk:11-jre-slim
+# Base WORKDIR => /
+FROM openjdk:24-jdk-slim
+WORKDIR /app
 
-# Add a volume pointing to /tmp
-VOLUME /tmp
+# Define build-time argument
+ARG imageName
 
-# Copy the application JAR file
-COPY target/api-gateway-hospital-0.0.1-SNAPSHOT.jar app.jar
+# Set environment variable from ARG
+ENV IMAGE_NAME=${imageName}
 
-# Run the application
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+# Copy Jar from build context to /app directory in the image
+COPY target/${IMAGE_NAME}.jar ${IMAGE_NAME}.jar
+
+# Set the entry point
+ENTRYPOINT ["sh", "-c", "java -jar /app/${IMAGE_NAME}.jar"]
