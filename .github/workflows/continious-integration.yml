@@ -40,7 +40,7 @@ jobs :
       run: mvn clean install docker:build
 
     - name: Re Tag the docker image
-      run: docker tag dnyanyog.org/api-gateway:latest rohit2127/api-gateway:latest
+      run: docker tag your-docker-registry/api-gateway:latest rohit2127/api-gateway:latest
 
     - name: Login into the github registery
       uses: docker/login-action@v2
