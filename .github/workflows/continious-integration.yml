@@ -23,6 +23,8 @@ jobs :
     - name: Perform google formatter check
       run: mvn com.spotify.fmt:fmt-maven-plugin:format
 
+    
+
 
     - name: Gitleaks Scan
       uses: zricethezav/gitleaks-action@v1.3.0
@@ -36,4 +38,15 @@ jobs :
 
     - name: Build code and Create docker image
       run: mvn clean install docker:build
+
+    - name: Re Tag the docker image
+      run: docker tag dnyanyog.org/api-gateway:latest rohit2127/api-gateway:latest
+
+    - name: Login into the github registery
+      uses: docker/login-action@v2
+      with: 
+         username: ${{secrets.DOCKER_REGISTRY_USERNAME}}
+         password: ${{secrets.DOCKER_REGISTRY_PAT}}
+    - name : Push in docker hub
+      run: docker push rohit2127/api-gateway:latest
         
